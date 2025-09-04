@@ -159,7 +159,7 @@
       <div style="display:flex;gap:8px;align-items:center">
         <div class="menu-toggle" id="menuToggle">☰</div>
         <div class="nav-cta">
-          <a class="btn btn-ghost" href="#tours">Book</a>
+          <a class="btn btn-ghost" href="booking.html">Book</a>
           <a class="btn btn-primary" href="#contact">Visit</a>
         </div>
       </div>
@@ -204,6 +204,7 @@
     </div>
   </section>
 
+  <!-- WHY VISIT -->
   <section id="why" class="wrap">
     <h2 class="section-title">Why Visit</h2>
     <div class="info-grid">
@@ -271,6 +272,8 @@
       </figure>
 
       <figure class="photo fade-in">
+        <a href="https://indiplomacy.com/wp-content/uploads/2023/06/Fountain_at_Olumo_Rock_in_Abeokuta_Ogun_State_Nigeria-1536x102
+<figure class="photo fade-in">
         <a href="https://indiplomacy.com/wp-content/uploads/2023/06/Fountain_at_Olumo_Rock_in_Abeokuta_Ogun_State_Nigeria-1536x1024-1-1024x683.jpg" target="_blank" rel="noopener">
           <img loading="lazy" src="https://indiplomacy.com/wp-content/uploads/2023/06/Fountain_at_Olumo_Rock_in_Abeokuta_Ogun_State_Nigeria-1536x1024-1-1024x683.jpg" alt="Fountain at Olumo Rock">
           <div class="overlay"><div class="meta"><strong>Visitor Complex</strong><p>Galleries & spaces</p></div></div>
@@ -331,9 +334,7 @@
     </div>
   </footer>
 
-  <!-- -------------------------
-       JavaScript: interactions
-       ------------------------- -->
+  <!-- JavaScript -->
   <script>
     // set year
     document.getElementById('yr').textContent = new Date().getFullYear();
@@ -345,7 +346,7 @@
       navList.classList.toggle('show');
     });
 
-    // reveal on scroll (simple)
+    // reveal on scroll
     const revealTargets = document.querySelectorAll('.fade-in, .photo, .info-card, .testi, .card');
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -362,10 +363,7 @@
       if(!heroEl) return;
       const sc = window.scrollY * 0.15;
       heroEl.style.setProperty('--hero-offset', `${sc}px`);
-      // kept light — heavy parallax avoided for performance
     });
-
-    // gallery links open in new tab (already set via anchor target="_blank")
   </script>
 </body>
 </html>
