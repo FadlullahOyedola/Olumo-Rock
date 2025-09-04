@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmed - Olumo Rock</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                  url('https://static.wixstatic.com/media/b98b0a_5aef202c037d4fdeb349f0ab974d71d6~mv2.jpg/v1/fill/w_1000,h_750,al_c,q_85/b98b0a_5aef202c037d4fdeb349f0ab974d71d6~mv2.jpg')
+                  no-repeat center center/cover;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .thankyou-container {
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+      padding: 2rem 3rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      animation: slideUp 1s ease;
+    }
+
+    .thankyou-container h1 {
+      color: #006400;
+      margin-bottom: 1rem;
+    }
+
+    .thankyou-container p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .reference {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      color: #444;
+    }
+
+    .btn-home {
+      display: inline-block;
+      background: #006400;
+      color: #fff;
+      padding: 0.8rem 2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: 0.3s;
+      font-size: 1rem;
+    }
+
+    .btn-home:hover {
+      background: #228B22;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="thankyou-container">
+    <h1>🎉 Booking Confirmed!</h1>
+    <p>Thank you for booking a tour with <strong>Olumo Rock</strong>.</p>
+    <p class="reference">Your Booking Reference: <span id="ref-code"></span></p>
+    <a href="index.html" class="btn-home">Go Back Home</a>
+  </div>
+
+  <script>
+    // Generate a random booking reference
+    function generateRef() {
+      return "OLM-" + Math.floor(Math.random() * 90000 + 10000);
+    }
+    document.getElementById("ref-code").innerText = generateRef();
+  </script>
+</body>
+</html>

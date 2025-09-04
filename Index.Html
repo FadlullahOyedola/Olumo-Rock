@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Olumo Rock — Abeokuta</title>
+  <meta name="description" content="Olumo Rock — history, tours, gallery and visitor guide in Abeokuta, Ogun State."/>
+  <style>
+    /* -------------------------
+       Variables & Base Styles
+       ------------------------- */
+    :root{
+      --bg:#071324;
+      --surface:#0f1724;
+      --muted:#9aa6b2;
+      --text:#e6eef2;
+      --accent:#1f8a56;
+      --accent-2:#6abf8a;
+      --glass: rgba(255,255,255,0.04);
+      --card-shadow: 0 12px 36px rgba(6,12,18,0.45);
+      --maxw:1200px;
+      --radius:12px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;color:var(--text);background:linear-gradient(180deg,#071324 0%, #071b2a 100%) fixed;}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%;height:auto;border-radius:8px}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 18px}
+
+    /* -------------------------
+       Header / Navigation
+       ------------------------- */
+    header{position:sticky;top:0;z-index:60;background:linear-gradient(180deg, rgba(7,19,36,0.7), rgba(7,19,36,0.55));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:18px;color:var(--accent-2)}
+    .brand .logo{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:white;font-weight:800}
+    nav ul{display:flex;gap:16px;align-items:center;margin:0;padding:0;list-style:none}
+    nav a.navlink{color:var(--text);padding:8px 10px;border-radius:8px;font-weight:600;opacity:.95;transition:all .18s}
+    nav a.navlink:hover{background:rgba(255,255,255,0.03);transform:translateY(-2px)}
+    .nav-cta{display:flex;gap:10px}
+    .btn{padding:10px 14px;border-radius:999px;font-weight:700;border:2px solid transparent;cursor:pointer}
+    .btn-primary{background:var(--accent);color:#042310;border-color:rgba(0,0,0,0.07)}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--text)}
+    .menu-toggle{display:none;font-size:24px;color:var(--text);cursor:pointer}
+
+    /* -------------------------
+       HERO (parallax-like)
+       ------------------------- */
+    .hero{position:relative;min-height:84vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;border-radius:0 0 22px 22px}
+    .hero::before{
+      content:"";
+      position:absolute;inset:0;
+      background-image: url("https://visaliv.s3.ap-south-1.amazonaws.com/Olumo-Rock-Nigeria.jpg");
+      background-size:cover;background-position:center;
+      transform:translateZ(0);filter:brightness(.36) contrast(.98);
+      will-change:transform;
+    }
+    .hero-inner{position:relative;z-index:3;padding:42px 18px;color:var(--text);max-width:980px}
+    h1.hero-title{font-size:clamp(28px,6vw,56px);margin:0 0 14px;line-height:1.02;text-shadow:0 8px 30px rgba(0,0,0,0.6)}
+    p.lead{margin:0 0 20px;color:var(--muted);font-size:18px;max-width:760px;margin-left:auto;margin-right:auto}
+    .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+    /* subtle scroll hint */
+    .scroll-hint{position:absolute;left:50%;transform:translateX(-50%);bottom:26px;color:rgba(255,255,255,0.7);font-size:13px;z-index:4}
+
+    /* -------------------------
+       Sections
+       ------------------------- */
+    section{padding:60px 0}
+    h2.section-title{color:var(--accent);font-size:24px;margin:0 0 12px}
+    p.muted{color:var(--muted);margin:0 0 12px}
+
+    /* -------------------------
+       Two column layout
+       ------------------------- */
+    .cols{display:grid;grid-template-columns:1fr 380px;gap:26px;align-items:start}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:14px;box-shadow:var(--card-shadow);border:1px solid rgba(255,255,255,0.02)}
+    .card h3{margin:0 0 8px}
+    .muted-small{color:var(--muted);font-size:14px}
+
+    /* -------------------------
+       Info cards grid
+       ------------------------- */
+    .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    .info-card{background:rgba(255,255,255,0.02);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+    .info-card h4{margin:0 0 8px;font-size:16px;color:var(--accent-2)}
+
+    /* -------------------------
+       Gallery (instagram style overlay)
+       ------------------------- */
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .photo{
+      position:relative;overflow:hidden;border-radius:12px;
+      background:linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.06));
+      transition:transform .35s ease, box-shadow .35s;
+    }
+    .photo img{display:block;width:100%;height:220px;object-fit:cover;transition:transform .45s}
+    .photo:hover img{transform:scale(1.06)}
+    .overlay{
+      position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(0deg, rgba(2,6,12,0.6), rgba(2,6,12,0.15));opacity:0;transition:opacity .28s;
+    }
+    .photo:hover .overlay{opacity:1}
+    .overlay .meta{color:#fff;text-align:center}
+    .overlay .meta p{margin:6px 0 0;color:rgba(255,255,255,0.95);font-weight:600}
+
+    /* -------------------------
+       Testimonials carousel (simple)
+       ------------------------- */
+    .testimonials{display:grid;gap:12px}
+    .testi{background:rgba(255,255,255,0.02);padding:16px;border-radius:12px}
+    .testi p{margin:0 0 10px;color:var(--muted)}
+
+    /* -------------------------
+       Contact / footer
+       ------------------------- */
+    .contact-list{display:flex;flex-direction:column;gap:8px}
+    footer{padding:28px 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted);text-align:center}
+
+    /* -------------------------
+       Small screens
+       ------------------------- */
+    @media (max-width:980px){
+      .cols{grid-template-columns:1fr}
+      nav ul{display:none}
+      .menu-toggle{display:block}
+    }
+    @media (max-width:520px){
+      .hero-inner{padding:28px 12px}
+      .hero h1{font-size:32px}
+      .photo img{height:160px}
+    }
+
+    /* -------------------------
+       Micro interactions
+       ------------------------- */
+    .fade-in{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
+    .reveal{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="logo">OR</div>
+        <div>Olumo Rock</div>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a class="navlink" href="#about">About</a></li>
+          <li><a class="navlink" href="#why">Why Visit</a></li>
+          <li><a class="navlink" href="#tours">Tours</a></li>
+          <li><a class="navlink" href="#gallery">Gallery</a></li>
+          <li><a class="navlink" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="menu-toggle" id="menuToggle">☰</div>
+        <div class="nav-cta">
+          <a class="btn btn-ghost" href="#tours">Book</a>
+          <a class="btn btn-primary" href="#contact">Visit</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home" aria-label="Olumo Rock hero">
+    <div class="hero-inner wrap">
+      <h1 class="hero-title">Olumo Rock — Abeokuta’s Living Fortress</h1>
+      <p class="lead">A natural fortress, cultural heart and panoramic lookout that shaped the story of Abeokuta. Visit for history, culture and unforgettable views.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#tours">Tickets & Hours</a>
+        <a class="btn btn-ghost" href="#gallery">Explore Gallery</a>
+      </div>
+    </div>
+    <div class="scroll-hint">scroll to explore ↓</div>
+  </section>
+
+  <!-- ABOUT & WHY -->
+  <section id="about" class="wrap">
+    <div class="cols fade-in" id="aboutCols">
+      <div>
+        <h2 class="section-title">About Olumo Rock</h2>
+        <p class="muted">Olumo Rock is a massive granite outcrop located in Abeokuta, Ogun State. For centuries it acted as a safe haven for the Egba people during 19th-century conflicts; today it stands as a cultural monument and tourist attraction offering caves, historical exhibits, and panoramic views.</p>
+
+        <div style="margin-top:18px" class="info-grid">
+          <div class="info-card"><h4>Natural Fortress</h4><p class="muted-small">Used as strategic shelter and lookout during tribal wars.</p></div>
+          <div class="info-card"><h4>Cultural Hub</h4><p class="muted-small">Home to shrines, festivals and the nearby Itoku Adire market.</p></div>
+          <div class="info-card"><h4>Accessible</h4><p class="muted-small">Stairs, pathways and elevator for visitors of all ages.</p></div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="card">
+          <h3>Quick Facts</h3>
+          <p class="muted-small"><strong>Height:</strong> ~137 meters • <strong>Location:</strong> Ikija, Abeokuta</p>
+          <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03);margin:12px 0">
+          <div class="muted-small"><strong>Facilities:</strong> Museum, gallery, craft shops, elevator, viewing deck</div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="why" class="wrap">
+    <h2 class="section-title">Why Visit</h2>
+    <div class="info-grid">
+      <div class="info-card fade-in"> <h4>History & Stories</h4><p class="muted-small">Hear oral histories and learn how Olumo shaped local identity.</p> </div>
+      <div class="info-card fade-in"> <h4>Photo Opportunities</h4><p class="muted-small">Epic skyline views at sunrise & sunset — a photographer’s dream.</p> </div>
+      <div class="info-card fade-in"> <h4>Local Culture</h4><p class="muted-small">Visit the Adire craft stalls and support local artisans.</p> </div>
+      <div class="info-card fade-in"> <h4>Easy Access</h4><p class="muted-small">Guided hikes, elevator access and nearby accommodation options.</p> </div>
+    </div>
+  </section>
+
+  <!-- TOURS -->
+  <section id="tours" class="wrap">
+    <h2 class="section-title">Tour Information</h2>
+    <div class="cols">
+      <div class="card fade-in">
+        <h3>Opening Hours</h3>
+        <p class="muted-small">Monday–Friday: 8:00 AM – 6:00 PM<br>Saturday–Sunday: 9:00 AM – 6:00 PM</p>
+
+        <h3 style="margin-top:14px">Ticket Options</h3>
+        <ul class="muted-small" style="padding-left:18px;margin-top:8px">
+          <li>Adults (stair access): ₦1,500</li>
+          <li>Children / Students: ₦1,000</li>
+          <li>Elevator access: ₦2,500</li>
+          <li>Guided tour (group): ₦1,000</li>
+        </ul>
+
+        <p class="muted-small" style="margin-top:10px"><strong>Tip:</strong> Visit early morning for cooler climb and fewer crowds.</p>
+      </div>
+
+      <aside>
+        <div class="card fade-in">
+          <h3>Plan Your Trip</h3>
+          <p class="muted-small"><strong>Getting there:</strong> Abeokuta is accessible by road from Lagos (~2 hours). Local taxis and rideshares available. Ask at your hotel about organised tours.</p>
+          <p class="muted-small" style="margin-top:8px"><strong>What to bring:</strong> Comfortable shoes, water, sun protection, and a small jacket for windy summit days.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="wrap">
+    <h2 class="section-title">Gallery</h2>
+    <p class="muted">Real photos of Olumo Rock and the visitor complex — click any image to view full resolution in a new tab.</p>
+
+    <div class="gallery-grid" style="margin-top:18px">
+      <figure class="photo fade-in">
+        <a href="https://visaliv.s3.ap-south-1.amazonaws.com/Olumo-Rock-Nigeria.jpg" target="_blank" rel="noopener">
+          <img loading="lazy" src="https://visaliv.s3.ap-south-1.amazonaws.com/Olumo-Rock-Nigeria.jpg" alt="Olumo Rock main view">
+          <div class="overlay"><div class="meta"><strong>Olumo Rock</strong><p>Panoramic view</p></div></div>
+        </a>
+      </figure>
+
+      <figure class="photo fade-in">
+        <a href="https://static.wixstatic.com/media/b98b0a_5aef202c037d4fdeb349f0ab974d71d6~mv2.jpg/v1/fill/w_1000,h_750,al_c,q_85" target="_blank" rel="noopener">
+          <img loading="lazy" src="https://static.wixstatic.com/media/b98b0a_5aef202c037d4fdeb349f0ab974d71d6~mv2.jpg/v1/fill/w_1000,h_750,al_c,q_85" alt="Olumo Rock side view">
+          <div class="overlay"><div class="meta"><strong>Adire & Market</strong><p>Nearby culture</p></div></div>
+        </a>
+      </figure>
+
+      <figure class="photo fade-in">
+        <a href="https://d1jcea4y7xhp7l.cloudfront.net/wp-content/uploads/2025/05/Gq_VmRgXAAAMf9b.jpg" target="_blank" rel="noopener">
+          <img loading="lazy" src="https://d1jcea4y7xhp7l.cloudfront.net/wp-content/uploads/2025/05/Gq_VmRgXAAAMf9b.jpg" alt="Event at Olumo Rock">
+          <div class="overlay"><div class="meta"><strong>Events</strong><p>Festivals & gatherings</p></div></div>
+        </a>
+      </figure>
+
+      <figure class="photo fade-in">
+        <a href="https://indiplomacy.com/wp-content/uploads/2023/06/Fountain_at_Olumo_Rock_in_Abeokuta_Ogun_State_Nigeria-1536x1024-1-1024x683.jpg" target="_blank" rel="noopener">
+          <img loading="lazy" src="https://indiplomacy.com/wp-content/uploads/2023/06/Fountain_at_Olumo_Rock_in_Abeokuta_Ogun_State_Nigeria-1536x1024-1-1024x683.jpg" alt="Fountain at Olumo Rock">
+          <div class="overlay"><div class="meta"><strong>Visitor Complex</strong><p>Galleries & spaces</p></div></div>
+        </a>
+      </figure>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="wrap">
+    <h2 class="section-title">What Visitors Say</h2>
+    <div class="testimonials" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px">
+      <div class="testi card fade-in">
+        <p>"Climbing Olumo was the highlight of our trip — the view from the top is unforgettable." — <strong>Amaka</strong></p>
+      </div>
+      <div class="testi card fade-in">
+        <p>"Loved the cultural markets and the museum. Food nearby was excellent." — <strong>Jide</strong></p>
+      </div>
+      <div class="testi card fade-in">
+        <p>"Great for photos. Try to visit at sunrise for soft light." — <strong>Sara</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="wrap">
+    <h2 class="section-title">Contact & Visit</h2>
+    <div class="cols">
+      <div class="card fade-in">
+        <h3>General Info</h3>
+        <p class="muted-small"><strong>Address:</strong> Olumo Rock Tourist Complex, Ikija, Abeokuta, Ogun State</p>
+        <p class="muted-small"><strong>Phone:</strong> +234 806 642 9002</p>
+        <p class="muted-small"><strong>Email:</strong> info@olumorock.ng</p>
+        <p style="margin-top:12px" class="muted-small"><strong>Note:</strong> For group bookings or events, contact the complex in advance for availability and rates.</p>
+      </div>
+
+      <aside>
+        <div class="card fade-in">
+          <h3>Plan Your Visit</h3>
+          <p class="muted-small">Nearest hotels, transport tips and ticketing guidance. If you'd like, we can draft a one-day itinerary for you.</p>
+          <div style="margin-top:10px" class="contact-list muted-small">
+            <div><strong>Best time:</strong> Nov–Mar (dry season)</div>
+            <div><strong>Duration:</strong> 2–4 hours for a relaxed visit</div>
+            <div><strong>Facilities:</strong> Toilets, eateries, souvenir stalls</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>© <span id="yr"></span> Olumo Rock • Abeokuta</div>
+        <div style="color:var(--muted)">Built with care • Real Olumo Rock images</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- -------------------------
+       JavaScript: interactions
+       ------------------------- -->
+  <script>
+    // set year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // responsive menu toggle
+    const toggle = document.getElementById('menuToggle');
+    toggle.addEventListener('click', ()=> {
+      const navList = document.querySelector('nav ul');
+      navList.classList.toggle('show');
+    });
+
+    // reveal on scroll (simple)
+    const revealTargets = document.querySelectorAll('.fade-in, .photo, .info-card, .testi, .card');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          e.target.classList.add('reveal');
+        }
+      });
+    }, {threshold: 0.18});
+    revealTargets.forEach(t => io.observe(t));
+
+    // small parallax effect on hero bg while scrolling
+    window.addEventListener('scroll', ()=> {
+      const heroEl = document.querySelector('.hero');
+      if(!heroEl) return;
+      const sc = window.scrollY * 0.15;
+      heroEl.style.setProperty('--hero-offset', `${sc}px`);
+      // kept light — heavy parallax avoided for performance
+    });
+
+    // gallery links open in new tab (already set via anchor target="_blank")
+  </script>
+</body>
+</html>
